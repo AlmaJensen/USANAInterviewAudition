@@ -12,11 +12,6 @@ namespace AndroidInterviewAudition.Services
 {
 	public class RSSReader
 	{
-		//public IEnumerable<FeedItem> GetFeed(string feedURL)
-		//{
-		//	var reader = new FeedReader();
-		//	return reader.RetrieveFeed(feedURL);
-		//}
 		public async void GetFeed(string feedURL)
 		{
 			var feed = await RssHelper.ReadFeedAsync(feedURL);
