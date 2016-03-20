@@ -5,14 +5,14 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using TNX.RssReader;
 
 namespace AndroidNativeUI
 {
-	[Activity(Label = "AndroidNativeUI", MainLauncher = true, Icon = "@drawable/icon")]
+	[Activity(Label = "Alma's Android RSS Reader", MainLauncher = true, Icon = "@drawable/icon")]
 	public class MainActivity : Activity
 	{
-		int count = 1;
-
+		RssFeed rssFeed;
 		protected override void OnCreate(Bundle bundle)
 		{
 			base.OnCreate(bundle);
@@ -22,9 +22,18 @@ namespace AndroidNativeUI
 
 			// Get our button from the layout resource,
 			// and attach an event to it
-			Button button = FindViewById<Button>(Resource.Id.MyButton);
+			//Button button = FindViewById<Button>(Resource.Id.MyButton);
 
-			button.Click += delegate { button.Text = string.Format("{0} clicks!", count++); };
+			//button.Click += delegate { button.Text = string.Format("{0} clicks!", count++); };
+		}
+
+		private async void LoadFeed()
+		{
+
+		}
+		private async void SaveFeed()
+		{
+
 		}
 	}
 }
