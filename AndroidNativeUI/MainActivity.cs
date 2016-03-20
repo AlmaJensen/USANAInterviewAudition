@@ -33,6 +33,9 @@ namespace AndroidNativeUI
 		private void InitializeActivity()
 		{
 			LoadFeed();
+			feedListView = FindViewById<ListView>(Resource.Id.FeedListView);
+			feedListView.Adapter = new Adapter.FeedAdapter(this, rssFeed);
+			feedListView.FastScrollEnabled = true;
 		}
 
 		private async void LoadFeed()
