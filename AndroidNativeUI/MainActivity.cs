@@ -6,6 +6,8 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using TNX.RssReader;
+using Plugin.Connectivity;
+using AndroidNativeUI.Service;
 
 namespace AndroidNativeUI
 {
@@ -29,8 +31,27 @@ namespace AndroidNativeUI
 
 		private async void LoadFeed()
 		{
-
+			var rssTools = new RSSService();
+			if (CrossConnectivity.Current.IsConnected)
+			{
+				rssFeed = await rssTools.GetFeedFromInternet(Constants.FeedURL);
+			}
+			else
+			{
+				rssFeed = await rssTools.LoadFeedFromStorage();
+			}
 		}
+
+		private void LoadFeedFromStorage()
+		{
+			throw new NotImplementedException();
+		}
+
+		private void LoadFeedFromInternet()
+		{
+			throw new NotImplementedException();
+		}
+
 		private async void SaveFeed()
 		{
 
