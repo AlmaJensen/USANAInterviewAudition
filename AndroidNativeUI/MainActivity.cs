@@ -8,6 +8,7 @@ using Android.OS;
 using TNX.RssReader;
 using Plugin.Connectivity;
 using AndroidNativeUI.Service;
+using System.Threading.Tasks;
 
 namespace AndroidNativeUI
 {
@@ -30,24 +31,38 @@ namespace AndroidNativeUI
 			//button.Click += delegate { button.Text = string.Format("{0} clicks!", count++); };
 		}
 
-		private void InitializeActivity()
+		protected override void OnResume()
 		{
+			base.OnResume();
 			LoadFeed();
-			feedListView = FindViewById<ListView>(Resource.Id.FeedListView);
-			feedListView.Adapter = new Adapter.FeedAdapter(this, rssFeed);
+		}
+
+		private async Task LoadFeed()
+		{
+			var feedLoaded = await GetFeed();
+			if (feedLoaded)
+				feedListView.Adapter = new Adapter.FeedAdapter(this, rssFeed);
+		}
+
+		private async void InitializeActivity()
+		{
+			
+			feedListView = FindViewById<ListView>(Resource.Id.FeedListView);			
 			feedListView.FastScrollEnabled = true;
 		}
 
-		private async void LoadFeed()
+		private async Task<bool> GetFeed()
 		{
 			var rssTools = new RSSService();
 			if (CrossConnectivity.Current.IsConnected)
 			{
 				rssFeed = await rssTools.GetFeedFromInternet(Constants.FeedURL);
+				return true;
 			}
 			else
 			{
 				rssFeed = await rssTools.LoadFeedFromStorage();
+				return true;
 			}
 		}
 

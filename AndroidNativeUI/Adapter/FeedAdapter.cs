@@ -14,7 +14,7 @@ using TNX.RssReader;
 
 namespace AndroidNativeUI.Adapter
 {
-	public class FeedAdapter : BaseAdapter
+	public class FeedAdapter : BaseAdapter<RssItem>
 	{
 		RssItem[] items;
 		Activity context;
@@ -31,10 +31,10 @@ namespace AndroidNativeUI.Adapter
 			}
 		}
 
-		public override Java.Lang.Object GetItem(int position)
-		{
-			throw new NotImplementedException();
-		}
+		//public override Java.Lang.Object GetItem(int position)
+		//{
+		//	return items[position];
+		//}
 
 		public override long GetItemId(int position)
 		{
