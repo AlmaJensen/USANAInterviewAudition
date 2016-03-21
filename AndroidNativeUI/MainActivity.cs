@@ -1,14 +1,11 @@
-﻿using System;
+﻿
 using Android.App;
-using Android.Content;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
-using TNX.RssReader;
-using Plugin.Connectivity;
+using Android.Widget;
 using AndroidNativeUI.Service;
+using Plugin.Connectivity;
 using System.Threading.Tasks;
+using TNX.RssReader;
 
 namespace AndroidNativeUI
 {
@@ -24,11 +21,6 @@ namespace AndroidNativeUI
 			// Set our view from the "main" layout resource
 			SetContentView(Resource.Layout.Main);
 			InitializeActivity();
-			// Get our button from the layout resource,
-			// and attach an event to it
-			//Button button = FindViewById<Button>(Resource.Id.MyButton);
-
-			//button.Click += delegate { button.Text = string.Format("{0} clicks!", count++); };
 		}
 
 		protected override void OnResume()
@@ -46,8 +38,8 @@ namespace AndroidNativeUI
 
 		private async void InitializeActivity()
 		{
-			
-			feedListView = FindViewById<ListView>(Resource.Id.FeedListView);			
+
+			feedListView = FindViewById<ListView>(Resource.Id.FeedListView);
 			feedListView.FastScrollEnabled = true;
 		}
 
@@ -57,12 +49,18 @@ namespace AndroidNativeUI
 			if (CrossConnectivity.Current.IsConnected)
 			{
 				rssFeed = await rssTools.GetFeedFromInternet(Constants.FeedURL);
-				return true;
+				if (rssFeed != null)
+					return true;
+				else
+					return false;
 			}
 			else
 			{
 				rssFeed = await rssTools.LoadFeedFromStorage();
-				return true;
+				if (rssFeed != null)
+					return true;
+				else
+					return false;
 			}
 		}
 

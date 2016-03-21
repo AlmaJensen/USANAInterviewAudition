@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="Adapter\FeedAdapter.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="DetailFragment.cs" />
     <Compile Include="Interface\IFileService.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -86,9 +87,12 @@
     <AndroidResource Include="Resources\layout\FeedRowView.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\Main.axml" />
+    <AndroidResource Include="Resources\layout\DetailFragmentView.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Main.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
