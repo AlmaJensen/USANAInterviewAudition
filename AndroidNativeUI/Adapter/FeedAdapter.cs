@@ -16,11 +16,11 @@ namespace AndroidNativeUI.Adapter
 {
 	public class FeedAdapter : BaseAdapter<RssItem>
 	{
-		RssItem[] items;
+		List<RssItem> items;
 		Activity context;
-		public FeedAdapter(Activity context, RssFeed feed)
+		public FeedAdapter(Activity context, List<RssItem> feed)
 		{
-			items = feed.Items.ToArray();
+			items = feed;
 			this.context = context;
 		}
 		public override int Count
