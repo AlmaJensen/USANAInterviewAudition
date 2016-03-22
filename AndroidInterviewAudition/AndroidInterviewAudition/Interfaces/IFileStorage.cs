@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace AndroidInterviewAudition.Interfaces
 {
-	interface IFileStorage
+	public interface IFileStorage
 	{
+		string MyDocumentsPath { get; }
+		Task<bool> Delete(string path);
+		Task<bool> Save(string filePath, string stringToSave);
+		Task<string> GetFileReadStream(string path);
 	}
 }
