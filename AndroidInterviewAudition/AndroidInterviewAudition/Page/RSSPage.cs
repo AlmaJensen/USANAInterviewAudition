@@ -10,7 +10,9 @@ namespace AndroidInterviewAudition.Page
 {
 	public class RSSPage : ContentPage
 	{
-		public RSSPage()
+		ListView rssFeed;
+		WebView rssDetail;
+		public RSSPage(string FeedType)
 		{
 			Content = new StackLayout
 			{

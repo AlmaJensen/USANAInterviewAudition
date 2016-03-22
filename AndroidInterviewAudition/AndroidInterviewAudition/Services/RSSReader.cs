@@ -12,11 +12,38 @@ namespace AndroidInterviewAudition.Services
 {
 	public class RSSReader
 	{
-		public async void GetFeed(string feedURL)
+		private const string fileName = "feed.dat";
+		public async Task<RssFeed> GetFeedFromInternet(string feedURL)
 		{
-			var feed = await RssHelper.ReadFeedAsync(feedURL);
-			foreach (var f in feed.Items)
-				Debug.WriteLine(f.Description);
+			return await RssHelper.ReadFeedAsync(feedURL);
+		}
+		public async Task<RssFeed> LoadFeedFromStorage()
+		{
+			try
+			{
+				var storage = new FileStorage();
+				var json = await storage.GetFileReadStream(Path.Combine(storage.MyDocumentsPath, fileName));
+				return Newtonsoft.Json.JsonConvert.DeserializeObject<RssFeed>(json);
+			}
+			catch (Exception ex)
+			{
+				return null;
+			}
+		}
+		public async Task<bool> SaveFeed(RssFeed feed)
+		{
+			try
+			{
+				var json = Newtonsoft.Json.JsonConvert.SerializeObject(feed);
+				var storage = new FileStorage();
+				return await storage.Save(Path.Combine(storage.MyDocumentsPath, fileName), json);
+			}
+			catch (Exception ex)
+			{
+				return false;
+			}
+		}
+		Debug.WriteLine(f.Description);
 		}
 	}
 }
