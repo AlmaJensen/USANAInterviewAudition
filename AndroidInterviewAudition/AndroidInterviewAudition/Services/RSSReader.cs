@@ -12,17 +12,20 @@ namespace AndroidInterviewAudition.Services
 {
 	public class RSSReader
 	{
-		private const string fileName = "feed.dat";
+
+		//private const string fileName = "feed.dat";
 		public async Task<RssFeed> GetFeedFromInternet(string feedURL)
 		{
 			return await RssHelper.ReadFeedAsync(feedURL);
 		}
-		public async Task<RssFeed> LoadFeedFromStorage()
+		public async Task<RssFeed> LoadFeedFromStorage(string fileName)
 		{
 			try
 			{
 				var storage = new FileStorage();
-				var json = await storage.GetFileReadStream(Path.Combine(storage.MyDocumentsPath, fileName));
+				var fileservice = new FileStorage();
+				var json = await fileservice.Load(fileName);
+				//var json = await storage.GetFileReadStream(Path.Combine(storage.MyDocumentsPath, fileName));
 				return Newtonsoft.Json.JsonConvert.DeserializeObject<RssFeed>(json);
 			}
 			catch (Exception ex)
@@ -30,20 +33,18 @@ namespace AndroidInterviewAudition.Services
 				return null;
 			}
 		}
-		public async Task<bool> SaveFeed(RssFeed feed)
+		public async Task<bool> SaveFeed(string fileName, RssFeed feed)
 		{
 			try
 			{
 				var json = Newtonsoft.Json.JsonConvert.SerializeObject(feed);
 				var storage = new FileStorage();
-				return await storage.Save(Path.Combine(storage.MyDocumentsPath, fileName), json);
+				return await storage.Save(fileName, json);
 			}
 			catch (Exception ex)
 			{
 				return false;
 			}
-		}
-		Debug.WriteLine(f.Description);
 		}
 	}
 }
