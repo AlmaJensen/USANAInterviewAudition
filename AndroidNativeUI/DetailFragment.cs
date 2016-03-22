@@ -16,6 +16,8 @@ namespace AndroidNativeUI
 {
 	public class DetailFragment : Android.App.Fragment
 	{
+		private const string HTMLStart = "<html><head></head><body>";
+		private const string HTMLEnd = "</body></html>";
 		public const string ARGNAME = "position";
 		public WebView FeedDetail { get; set; }
 		public static DetailFragment NewInstance()
@@ -42,9 +44,11 @@ namespace AndroidNativeUI
 		}
 		public void UpadateView(string contentToDisplay)
 		{
-			if (FeedDetail == null)
-				FeedDetail = new WebView(Activity);
-			FeedDetail.LoadData(contentToDisplay, "text/html", null);
+			FeedDetail = Activity.FindViewById<WebView>(Resource.Id.FragmentWebView);
+			System.Diagnostics.Debug.WriteLine(contentToDisplay);
+			//if (FeedDetail == null)
+			//	FeedDetail = new WebView(Activity);
+			FeedDetail.LoadData(HTMLStart + contentToDisplay + HTMLEnd, "text/html", null);
 		}
 	}
 }

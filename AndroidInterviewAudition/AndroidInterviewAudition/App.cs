@@ -1,4 +1,5 @@
-﻿using AndroidInterviewAudition.Services;
+﻿using AndroidInterviewAudition.Page;
+using AndroidInterviewAudition.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,25 +15,13 @@ namespace AndroidInterviewAudition
 		public App()
 		{
 			// The root page of your application
-			MainPage = new ContentPage
-			{
-				Content = new StackLayout
-				{
-					VerticalOptions = LayoutOptions.Center,
-					Children = {
-						new Label {
-							XAlign = TextAlignment.Center,
-							Text = "Welcome to Xamarin Forms!"
-						}
-					}
-				}
-			};
+			MainPage = new NavigationPage(new MainPage());
 		}
 
 		protected override void OnStart()
 		{
-			var rss = new RSSReader();
-			rss.GetFeed(Constants.FeedURL);
+			//var rss = new RSSReader();
+			//rss.GetFeed(Constants.FeedURL);
 			//var rssReader = new AndroidInterviewAudition.Services.RSSReader();
 			//var items = rssReader.GetFeed(AndroidInterviewAudition.Constants.FeedURL);
 			//foreach (var it in items)
