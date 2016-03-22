@@ -15,7 +15,6 @@ namespace AndroidInterviewAudition.Services
 		{
 			try
 			{
-
 				return await fileService.Delete(Path.Combine(fileService.MyDocumentsPath, fileName));
 			}
 			catch
@@ -40,7 +39,6 @@ namespace AndroidInterviewAudition.Services
 			try
 			{
 				return await fileService.GetFileReadStream(Path.Combine(fileService.MyDocumentsPath, fileName));
-
 			}
 			catch
 			{
