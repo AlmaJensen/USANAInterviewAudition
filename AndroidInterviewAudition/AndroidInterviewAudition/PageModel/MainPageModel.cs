@@ -1,4 +1,5 @@
 ﻿using AndroidInterviewAudition.Helpers;
+using AndroidInterviewAudition.Page;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace AndroidInterviewAudition.PageModel
 			{
 				return new Command(async () =>
 				{
-
+					await Navigation.PushAsync(new RSSPage());
 				});
 			}
 		}
